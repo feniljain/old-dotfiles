@@ -16,8 +16,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 " MISCELLANEOUS
-Plug 'dhruvasagar/vim-zoom' " Tmux like zoom in/out, <c-w>m
-Plug 'p00f/nvim-ts-rainbow'
+Plug 'szw/vim-maximizer'
 Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'ThePrimeagen/harpoon'
@@ -25,12 +24,78 @@ Plug 'Yggdroot/indentLine'
 Plug 'farmergreg/vim-lastplace'
 Plug 'christoomey/vim-system-copy'
 Plug 'preservim/nerdtree'
-Plug 'jiangmiao/auto-pairs'
 Plug 'romgrk/winteract.vim'
-Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " For neovim client browser
 Plug 'tpope/vim-surround'
 Plug 'diepm/vim-rest-console'
 Plug 'lambdalisue/suda.vim'
+Plug 'jiangmiao/auto-pairs'
+Plug 'Pocco81/ISuckAtSpelling.nvim'
+" Plug 'lewis6991/spellsitter.nvim'
+" Plug 'bfredl/nvim-luadev'
+
+" LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-compe'
+Plug 'glepnir/lspsaga.nvim'
+Plug 'kabouzeid/nvim-lspinstall'
+Plug 'folke/trouble.nvim'
+Plug 'nvim-lua/lsp-status.nvim'
+Plug 'onsails/lspkind-nvim'
+Plug 'ray-x/lsp_signature.nvim'
+
+" Syntax Highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/playground'
+
+
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope-fzy-native.nvim'
+Plug 'nvim-telescope/telescope-project.nvim'
+
+" GIT
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+Plug 'drzel/vim-repo-edit'
+Plug 'junegunn/gv.vim'
+Plug 'ThePrimeagen/git-worktree.nvim'
+
+" HTML AND CSS AND JS
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+
+
+" THEMES
+Plug 'gruvbox-community/gruvbox'
+" Plug 'eddyekofo94/gruvbox-flat.nvim'
+
+" Rust
+Plug 'cespare/vim-toml'
+Plug 'simrat39/rust-tools.nvim'
+
+Plug 'hoob3rt/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
+
+" RFCs
+Plug 'ThePrimeagen/rfc-reader'
+
+" Debugger
+Plug 'puremourning/vimspector'
+
+" Testing
+Plug 'vim-test/vim-test'
+
+" Plugins in dev
+" Plug '~/Projects/Learn/vim/todomania'
+call plug#end()
+" }}}
+
+" Unused plugins ---------------------- {{{
+" Plug 'airblade/vim-rooter'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } } " For neovim client browser
+" Plug 'p00f/nvim-ts-rainbow' " Do not install it alongside treesitter, vim
+" will start lagging badly
+" Plug 'dhruvasagar/vim-zoom' " Tmux like zoom in/out, <c-w>m
 " Plug 'vimpostor/vim-tpipeline'
 " Plug 'frazrepo/vim-rainbow'
 " Plug 'RRethy/vim-illuminate'
@@ -43,13 +108,6 @@ Plug 'lambdalisue/suda.vim'
 " Plug 'mhinz/vim-startify'
 " Plug 'preservih/tagbar'
 
-" Autocompletion
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
-Plug 'glepnir/lspsaga.nvim'
-Plug 'kabouzeid/nvim-lspinstall'
-Plug 'folke/lsp-trouble.nvim'
-Plug 'nvim-lua/lsp-status.nvim'
 " Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Plug 'w0rp/ale'
@@ -59,55 +117,29 @@ Plug 'nvim-lua/lsp-status.nvim'
 " Plug 'bufbuild/vim-buf'
 " Plug 'uber/prototool', { 'rtp':'vim/prototool' }
 
-" Syntax Highlighting
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'nvim-treesitter/playground'
-
-" DART AND FLUTTER
-Plug 'dart-lang/dart-vim-plugin'
-Plug 'natebosch/vim-lsc'
-Plug 'natebosch/vim-lsc-dart'
-
-" Fuzzy Finders
-" Plug 'junegunn/fzf.vim'
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'ggreer/the_silver_searcher'
-
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-" Plug 'nvim-telescope/telescope-media-files.nvim'
-
-" GIT
-Plug 'airblade/vim-gitgutter'
-Plug 'tpope/vim-fugitive'
-Plug 'drzel/vim-repo-edit'
-Plug 'junegunn/gv.vim'
-" Plug 'APZelos/blamer.nvim'
-Plug 'ThePrimeagen/git-worktree.nvim'
-
-" HTML AND CSS AND JS
-" Plug 'maxmellon/vim-jsx-pretty'
-" Plug 'hail2u/vim-css3-syntax'
-" Plug 'pangloss/vim-javascript'
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 " Plug 'fannheyward/coc-react-refactor'
 " Plug 'neoclide/coc-eslint'
 " Plug 'leafgarland/typescript-vim'
 " Plug 'peitalin/vim-jsx-typescript'
-
-" THEMES
+" DART AND FLUTTER
+" Plug 'dart-lang/dart-vim-plugin'
+" Plug 'natebosch/vim-lsc'
+" Plug 'natebosch/vim-lsc-dart'
+" Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'hail2u/vim-css3-syntax'
+" Plug 'pangloss/vim-javascript'
 " Plug 'flazz/vim-colorschemes'
-Plug 'ayu-theme/ayu-vim'
+" Plug 'ayu-theme/ayu-vim'
 " Plug 'morhetz/gruvbox'
-Plug 'gruvbox-community/gruvbox'
-Plug 'hzchirs/vim-material'
-Plug 'joshdick/onedark.vim'
-Plug 'altercation/vim-colors-solarized'
-Plug 'tomasr/molokai'
-Plug 'arcticicestudio/nord-vim'
-Plug 'pineapplegiant/spaceduck'
-Plug 'srcery-colors/srcery-vim'
-Plug 'sainnhe/sonokai'
+" Plug 'hzchirs/vim-material'
+" Plug 'joshdick/onedark.vim'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'tomasr/molokai'
+" Plug 'arcticicestudio/nord-vim'
+" Plug 'pineapplegiant/spaceduck'
+" Plug 'srcery-colors/srcery-vim'
+" Plug 'sainnhe/sonokai'
+" Plug 'tomasiser/vim-code-dark'
 
 " GOLANG
 " Plug 'fatih/vim-go', {'do': ':GoUpdateBinaries'}
@@ -116,7 +148,6 @@ Plug 'sainnhe/sonokai'
 " RUST
 " Plug 'rust-lang/rust.vim' " use alognwith coc-rls or coc-rust-analyzer
 " Current use coc-rust-analyzer
-Plug 'cespare/vim-toml'
 
 " Statusline
 " Plug 'itchyny/lightline.vim'
@@ -126,19 +157,17 @@ Plug 'cespare/vim-toml'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
-Plug 'hoob3rt/lualine.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
+" Fuzzy Finders
+" Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+" Plug 'ggreer/the_silver_searcher'
+" Plug 'nvim-telescope/telescope-media-files.nvim'
 
-" RFCs
-Plug 'ThePrimeagen/rfc-reader'
+" Plug 'APZelos/blamer.nvim'
 
 " Debugger
-Plug 'puremourning/vimspector'
 " Plug 'mfussenegger/nvim-dap'
-
-" Plugins in dev
-Plug '~/Projects/Learn/vim/todomania'
-call plug#end()
+" Plug 'rcarriga/nvim-dap-ui'
 " }}}
 
 " Autocommands ---------------------- {{{
@@ -149,10 +178,10 @@ call plug#end()
  " augroup END
 
  " Remove trailing white spaces
- " augroup removeTrailingSpace
- "     autocmd!
- "     autocmd BufWritePre *.* :%s/\s\+$//e
- " augroup END
+ augroup removeTrailingSpace
+     autocmd!
+     autocmd BufWritePre *.* :%s/\s\+$//e
+ augroup END
 
  " Protobuf support
  augroup filetype
@@ -198,8 +227,17 @@ function! JSONPreview()
     set noma
     execute ":Prettier"
 endfunction
-vnoremap <space>jp :call JSONPreview()<CR>
-nnoremap <space>cb :bd!<CR>
+vnoremap <Space>jp :call JSONPreview()<CR>
+nnoremap <Space>cb :bd!<CR>
+" }}}
+
+" terminal split helper function ---------------------- {{{
+function! TerminalSplitHelper()
+    split tempTerminal
+    <Space>j
+    resize -15
+endfunction
+" nnoremap <Space>tt :call TerminalSplitHelper()<CR>
 " }}}
 
 " Help Open Function(Helps in lua dev) ---------------------- {{{
@@ -221,38 +259,6 @@ nnoremap <Space>sl :call matchadd('LineHighlight', '\%'.line('.').'l')
 
 " clear all the highlighted lines
 nnoremap <Space>cs :call clearmatches()
-" }}}
-
-" Enable scrolling for docs in floating windows ----------- {{{
-	" function FindCursorPopUp()
-	" 	let radius = get(a:000, 0, 2)
-  "   let srow = screenrow()
-  "   let scol = screencol()
-  "   " it's necessary to test entire rect, as some popup might be quite small
-  "   for r in range(srow - radius, srow + radius)
-	" 		for c in range(scol - radius, scol + radius)
-	" 			let winid = popup_locate(r, c)
-  "       if winid != 0
-  "         return winid
-  "       endif
-  "     endfor
-  "   endfor
-  "   return 0
-  " endfunction
-  "
-  " function ScrollPopUp(down)
-	" 	let winid = FindCursorPopUp()
-  "   if winid == 0
-  "     return 0
-  "   endif
-  "
-  "   let pp = popup_getpos(winid)
-  "   call popup_setoptions( winid,
-  "         \ {'firstline' : pp.firstline + ( a:down ? 1 : -1 ) } )
-  "   return 1
-  " endfunction
-	" nnoremap <expr> <c-d> ScrollPopUp(1) ? '<esc>' : '<c-d>'
-	" nnoremap <expr> <c-u> ScrollPopUp(0) ? '<esc>' : '<c-u>'
 " }}}
 
 " Break bad habits in vim by getting a floating window alert ----------- {{{
@@ -352,6 +358,11 @@ let g:ackprg = 'ag --vimgrep'
 
 let g:nnn#layout = { 'window': { 'width': 0.9, 'height': 0.6, 'highlight': 'Debug' } }
 let g:nnn#statusline = 1
+
+" Syntax highlighting for lua in vim files
+let g:vimsyn_embed = 'l'
+
+let g:gitgutter_enabled = 1
 " }}}
 
 " Vim JS Config ---------------------- {{{
@@ -404,3 +415,6 @@ let g:nnn#statusline = 1
 nmap <silent> gof :exec '!gofmt -w '.expand('%:p')<CR>
 " nmap <silent> gol :exec '!golint .'<CR>
 nmap <silent> gol :exec '!golint '.expand('%:p')<CR>
+
+nnoremap <Space>m :MaximizerToggle<CR>
+" nmap <silent> rof :exec '!rustfmt -w '.expand('%:p')<CR>

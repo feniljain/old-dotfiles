@@ -56,6 +56,7 @@ lsp_status.register_progress()
 require('lualine').setup{
   options = {
     theme = 'seoul256',
+    -- theme = 'gruvbox-flat',
     section_separators = {'', ''},
     component_separators = {'', ''},
     icons_enabled = true,

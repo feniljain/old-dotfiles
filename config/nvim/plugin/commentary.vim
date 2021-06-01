@@ -1,6 +1,7 @@
 let s:comment_map = {
     \   "yml": '#',
     \   "yaml": '#',
+    \   "toml": '#',
     \   "c": '\/\/',
     \   "cpp": '\/\/',
     \   "go": '\/\/',
@@ -25,15 +26,16 @@ let s:comment_map = {
     \   "ahk": ';',
     \   "vim": '"',
     \   "tex": '%',
+    \   "css": '/*',
     \ }
 
 function! ToggleComment()
     if has_key(s:comment_map, &filetype)
         let comment_leader = s:comment_map[&filetype]
-        if getline('.') =~ "^\\s*" . comment_leader . " " 
+        if getline('.') =~ "^\\s*" . comment_leader . " "
             " Uncomment the line
             execute "silent s/^\\(\\s*\\)" . comment_leader . " /\\1/"
-        else 
+        else
             if getline('.') =~ "^\\s*" . comment_leader
                 " Uncomment the line
                 execute "silent s/^\\(\\s*\\)" . comment_leader . "/\\1/"

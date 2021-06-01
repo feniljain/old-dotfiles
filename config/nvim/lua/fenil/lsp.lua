@@ -1,5 +1,25 @@
+require('lspkind').init({})
+
 local nvim_lsp = require('lspconfig')
 local on_attach = function(client, bufnr)
+
+  local cfg = {
+      bind = true, -- This is mandatory, otherwise border config won't get registered.
+                   -- If you want to hook lspsaga or other signature handler, pls set to false
+      doc_lines = 10, -- only show one line of comment set to 0 if you do not want API comments be shown
+
+      hint_enable = false, -- virtual hint enable
+      hint_prefix = "🐼 ",  -- Panda for parameter
+      hint_scheme = "String",
+
+      handler_opts = {
+        border = "shadow"   -- double, single, shadow, none
+      },
+      decorator = {"`", "`"}  -- or decorator = {"***", "***"}  decorator = {"**", "**"} see markdown help
+  }
+
+  require'lsp_signature'.on_attach(cfg)
+
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
@@ -9,10 +29,11 @@ local on_attach = function(client, bufnr)
   local opts = { noremap=true, silent=true }
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'gpd', '<cmd>Lspsaga preview_definition<cr>', opts)
+  buf_set_keymap('n', 'gpgd', '<cmd>Lspsaga preview_definition<cr>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   buf_set_keymap('n', 'gK', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<CR>', opts)
   -- buf_set_keymap('n', 'wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', 'wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   -- buf_set_keymap('n', 'wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -21,17 +42,20 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gnr', '<cmd>Lspsaga rename<cr>', opts)
   -- buf_set_keymap('n', 'gca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
-  -- buf_set_keymap('n', 'gr', '<cmd>LspTrouble lsp_references<cr>', opts)
-  buf_set_keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>', opts)
-  buf_set_keymap('n', 'gca', '<cmd>Lspsaga code_action<cr>', opts)
-  buf_set_keymap('n', 'grca', '<cmd>Lspsaga range_code_action<cr>', opts)
+  -- buf_set_keymap('n', 'gr', '<cmd>LspTrouble lsp_references<cr>', opts) buf_set_keymap('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>', opts)
+  -- buf_set_keymap('n', 'gca', '<cmd>Lspsaga code_action<cr>', opts)
+  buf_set_keymap('n', 'gca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+  buf_set_keymap('n', 'gcra', '<cmd>Lspsaga range_code_action<cr>', opts)
   buf_set_keymap('n', 'gwd', '<cmd>LspTrouble lsp_workspace_diagnostics<cr>', opts)
-  buf_set_keymap('n', 'gdd', '<cmd>LspTrouble lsp_document_diagnostics<cr>', opts)
-  buf_set_keymap('n', 'gqf', '<cmd>LspTrouble  quickfix<cr>', opts)
+  buf_set_keymap('n', 'gfd', '<cmd>LspTrouble lsp_document_diagnostics<cr>', opts)
+  buf_set_keymap('n', 'gqf', '<cmd>LspTrouble quickfix<cr>', opts)
   buf_set_keymap('n', 'gsd', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', 'gdp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', 'gdn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_set_keymap('n', 'gpd', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_set_keymap('n', 'gnd', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', 'gll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', 'gll', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+  buf_set_keymap('n', 'gsf', '<cmd>lua vim.lsp.buf.document_symbol()<CR>', opts)
+  buf_set_keymap('n', 'gsw', '<cmd>lua vim.lsp.buf.workspace_symbol()<CR>', opts)
 
   -- Set some keybinds conditional on server capabilities
   if client.resolved_capabilities.document_formatting then
@@ -66,7 +90,7 @@ local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
 -- }
 --
 -- require'lspconfig'.pyls.setup{ on_attach=on_attach }
-require'lspconfig'.gopls.setup{ on_attach=on_attach }
+-- require'lspconfig'.gopls.setup{ on_attach=on_attach }
 -- require'lspconfig'.rust_analyzer.setup{ on_attach=on_attach }
 
 nvim_lsp.sumneko_lua.setup {
@@ -89,6 +113,10 @@ nvim_lsp.sumneko_lua.setup {
                 library = {
                     [vim.fn.expand('$VIMRUNTIME/lua')] = true,
                     [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+                    [vim.fn.expand('~/.local/share/nvim/plugged/telescope.nvim')] = true,
+                    [vim.fn.expand('~/.local/share/nvim/plugged/plenary.nvim')] = true,
+                    [vim.fn.expand('~/.local/share/nvim/plugged/harpoon')] = true,
+                    [vim.fn.expand('~/.local/share/nvim/plugged/popup.nvim')] = true,
                 },
             },
         },
@@ -99,6 +127,23 @@ local function setup_servers()
   require'lspinstall'.setup()
   local servers = require'lspinstall'.installed_servers()
   for _, server in pairs(servers) do
+    -- print(server)
+    -- if server == "rust" then
+    --     require'lspconfig'[server].setup{
+    --             settings = {
+    --                 ["rust-analyzer"] = {
+    --                     procMacro = {
+    --                         enable = true
+    --                     },
+    --                     checkOnSave = {
+    --                         command = "clippy"
+    --                     },
+    --                 },
+    --             },
+    --         on_attach=on_attach,
+    --     }
+    --     return
+    -- end
     require'lspconfig'[server].setup{ on_attach = on_attach }
   end
 end

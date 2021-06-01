@@ -11,6 +11,8 @@
  let g:gruvbox_guisp_fallback = 'bg'
  colorscheme gruvbox
 
+" colorscheme gruvbox-flat
+
 " Ayu
 " let ayucolor="dark"
 " colorscheme ayu

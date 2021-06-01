@@ -4,7 +4,7 @@ augroup netrw_maps
 augroup END
 
 function! s:ApplyNetrwMaps()
-    lua require("fenil")
+    " lua require("fenil")
 
     nmap <buffer> ts :lua require('telescope.builtin').grep_string({ search = vim.fn.input("Grep For > ")})<CR>
     nmap <buffer> tg :lua require('telescope.builtin').git_files()<CR>

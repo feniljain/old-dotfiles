@@ -32,7 +32,8 @@ set syntax
 set noshowmode
 set autowrite
 set emoji
-set nowrap
+" set nowrap
+set wrap
 syntax on
 " Make search easier
 set smartcase

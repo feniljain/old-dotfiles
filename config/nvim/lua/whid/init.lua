@@ -4,12 +4,14 @@ local position = 0
 
 local W = {}
 
+-- TODO: Just for testing []
 W.center = function(str)
   local width = api.nvim_win_get_width(0)
   local shift = math.floor(width / 2) - math.floor(string.len(str) / 2)
   return string.rep(' ', shift) .. str
 end
 
+-- TODO: Just for testing(done) [X]
 W.open_window = function()
   buf = api.nvim_create_buf(false, true)
   local border_buf = api.nvim_create_buf(false, true)
@@ -61,6 +63,7 @@ W.open_window = function()
   api.nvim_buf_add_highlight(buf, -1, 'WhidHeader', 0, 0, -1)
 end
 
+-- TODO: Just for testing(done1) [x]
 W.update_view = function (direction)
   vim.api.nvim_buf_set_option(buf, 'modifiable', true)
   position = position + direction

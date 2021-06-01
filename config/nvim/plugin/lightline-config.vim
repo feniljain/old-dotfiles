@@ -21,7 +21,7 @@ let g:lightline = {
 \ 'colorscheme': 'seoul256',
 \ 'active': {
 \   'left': [ [ 'mode', 'paste' ],
-\             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ], ["nvim_treesitter#statusline(treesitter_opts)"] ]
+\             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ]]
 \ },
 \ 'component_function': {
 \   'gitbranch': 'gitbranch#name',

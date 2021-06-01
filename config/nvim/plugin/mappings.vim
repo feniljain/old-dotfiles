@@ -46,6 +46,7 @@ nnoremap <Space>rh :nohlsearch<CR>
 noremap <Space>ic =G<CR>
 " For opening explore
 noremap <Space>of :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
+" noremap <Space>tt :wincmd x<bar> :term <bar> :splitbelow resize 30<CR>
 noremap <Space>ex :Ex<CR>
 
 " Pane navigation

@@ -1,4 +1,4 @@
-" let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_enable_mappings = 'HUMAN'
 let g:vimspector_install_gadgets = [ 'vscode-go' ]
 
 fun! GotoWindow(id)
@@ -28,6 +28,14 @@ nnoremap <Space>d<space> :call vimspector#Continue()<CR>
 nmap <Space>drc <Plug>VimspectorRunToCursor
 nmap <Space>dbp <Plug>VimspectorToggleBreakpoint
 nmap <Space>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+" for normal mode - the word under the cursor
+nmap <Space>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Space>di <Plug>VimspectorBalloonEval
+
+nmap <LocalLeader><F11> <Plug>VimspectorUpFrame
+nmap <LocalLeader><F12> <Plug>VimspectorDownFrame
 
 " <Plug>VimspectorStop
 " <Plug>VimspectorPause

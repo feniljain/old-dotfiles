@@ -1,4 +1,5 @@
 " Vim-Fugitive
+"
 noremap <Space>gm :Gdiffsplit!<CR>
 noremap <Space>gl :diffget //2<CR>
 noremap <Space>gr :diffget //3<CR>
