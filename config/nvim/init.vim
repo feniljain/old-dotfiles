@@ -30,6 +30,10 @@ Plug 'diepm/vim-rest-console'
 Plug 'lambdalisue/suda.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Pocco81/ISuckAtSpelling.nvim'
+Plug 'rmagatti/auto-session'
+Plug 'rmagatti/session-lens'
+Plug 'sudormrfbin/cheatsheet.nvim'
+Plug 'tpope/vim-commentary'
 " Plug 'lewis6991/spellsitter.nvim'
 " Plug 'bfredl/nvim-luadev'
 
@@ -45,8 +49,8 @@ Plug 'ray-x/lsp_signature.nvim'
 
 " Syntax Highlighting
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'simrat39/symbols-outline.nvim'
 " Plug 'nvim-treesitter/playground'
-
 
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-telescope/telescope-fzy-native.nvim'

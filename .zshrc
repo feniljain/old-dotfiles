@@ -117,6 +117,9 @@ fi
 # To customize promp, run `p10k configure` or edit ~/.p10k.zsh.
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+
+export JAVA_HOME="/usr/lib/jvm/jdk-16.0.1"
+export PATH_TO_FX="/media/data/Misc/E/softwares/javafx-sdk-11.0.2/lib"
 export PATH="$PATH:/home/fenil/anaconda3/bin"
 export PATH="$PATH:$DART_SDK/bin"
 export PATH="$PATH:/home/fenil/flutter_linux_v1.9.1+hotfix.6-stable/flutter/bin"
@@ -135,6 +138,9 @@ export PATH="$PATH:/usr/local/share/npm/bin"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export MANPAGER="nvim -c 'set ft=man' -" # Open man pages in nvim with syntax highlighting
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 eval `dircolors /home/feniljain/.dir_colors/dircolors`
 
@@ -163,3 +169,4 @@ LC_TIME="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
 alias luamake=/home/feniljain/Projects/softwares/lua-language-server/3rd/luamake/luamake
+alias goland=/media/data/Misc/E/softwares/GoLand-2021.1.1/bin/goland.sh

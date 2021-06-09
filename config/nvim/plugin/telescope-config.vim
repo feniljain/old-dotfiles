@@ -12,7 +12,9 @@ nnoremap tb :lua require('telescope.builtin').builtin()<CR>
 nnoremap th :lua require('telescope.builtin').help_tags()<CR>
 nnoremap td :lua require('fenil.telescope').search_dotfiles()<CR>
 nnoremap tgb :lua require('fenil.telescope').git_branches()<CR>
-nnoremap tx :lua require('fenil.telescope').switch_projects()<CR>
+" nnoremap tx :lua require('fenil.telescope').switch_projects()<CR>
+nnoremap tx :lua require('session-lens').search_session()<CR>
+
 " nnoremap tp :lua require('telescope').extensions.project.project{display_type = 'full'}<CR>
 nnoremap tp :lua require'telescope'.extensions.project.project{ display_type = 'full' }<CR>
 nnoremap tgw :lua require('telescope').extensions.git_worktree.git_worktrees()<CR>

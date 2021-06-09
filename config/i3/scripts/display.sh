@@ -7,7 +7,8 @@
 
 
 # This is your default laptop screen, detect by running `xrandr`
-INTERNAL_OUTPUT="LVDS-1"
+#INTERNAL_OUTPUT="LVDS-1"
+INTERNAL_OUTPUT="eDP-1"
 
 # choices will be displayed in dmenu
 choices="laptop\ndual\nexternal\nclone"

@@ -146,7 +146,6 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$PATH:/home/fenil/evans_linux_386"
-export PATH="$PATH:/home/fenil/nvim-linux64/bin"
 export PATH="$PATH:/opt/firefox/firefox"
 #export PATH="$PATH:$DART_SDK/bin/"
 export PATH="$PATH:~/flutter_linux_v1.9.1+hotfix.6-stable/flutter/bin/cache/dart-sdk/bin"
@@ -156,6 +155,9 @@ export PATH="$PATH:/opt/firefox/firefox:$PATH"
 export EDITOR="nvim"
 export VISUAL="nvim"
 export MANPAGER="nvim -c 'set ft=man' -"
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
 eval `dircolors /home/feniljain/.dir_colors/dircolors`
 
