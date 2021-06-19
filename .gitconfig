@@ -1,0 +1,11 @@
+[user]
+    name = vi_mi
+    email = fenil.jain2018@vitstudent.ac.in
+[http]
+    postBuffer = 1048576000
+[https]
+    postBuffer = 1048576000
+[url "git@gitlab.com:"]
+    insteadOf = https://gitlab.com/
+[color]
+	ui = true
