@@ -80,5 +80,9 @@ nnoremap <silent> <C-q> :cw<CR>
 
 " Winteract Settings
 nmap <Space>rw :InteractiveWindow<CR>
+
+" Window split shortcuts
+nnoremap <Space>v :vsplit<CR>
+nnoremap <Space>- :split<CR>
 " }}}
 

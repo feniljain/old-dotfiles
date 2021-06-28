@@ -1,0 +1,135 @@
+#!/bin/bash
+
+PROJECTS="~/Projects"
+APPOINTY="~/Projects/golang-projects/appointy"
+KNOWLEDGE_BASE="~/Projects/knowledge-base"
+RUST_PROJECTS="~/Projects/rust-projects"
+GOLANG_PROJECTS="~/Projects/golang-projects"
+
+createWindows() {
+    N=$1
+
+    # Create N windows
+    for (( i=2; i<=$N; ++i)); do
+        case $i in
+        2)
+           tmux neww -t $sessionName -n 'Secondary'
+           ;;
+        3)
+           tmux neww -t $sessionName -n 'kb-gotop-buf'
+           ;;
+        4)
+           tmux neww -t $sessionName -n 'Misc'
+           ;;
+        *) echo "Wrong index $i"
+        esac
+    done
+}
+
+createSession() {
+    local session=$1
+    local cmd="tmux new -s $sessionName -d > /dev/null 2>&1"
+
+    eval $cmd
+}
+
+buildVIFMCmd() {
+    local primaryFolder=$1
+    local secondaryFolder=$2
+
+    vifmCmd="vifm $primaryFolder $secondaryFolder"
+}
+
+buildAppointySession() {
+
+    # Window 1
+    buildVIFMCmd "$APPOINTY"
+    tmux select-window -t $sessionName:1
+    tmux rename-window 'Primary'
+    # tmux send-keys -t $sessionName:0.0 "$vifmCmd"
+    tmux send-keys "$vifmCmd" 'C-m'
+
+    # Window 2
+    buildVIFMCmd "$APPOINTY"
+    tmux select-window -t $sessionName:2
+    tmux send-keys "$vifmCmd" 'C-m'
+
+    # Window 3
+    tmux select-window -t $sessionName:3
+    tmux send-keys "nvim $KNOWLEDGE_BASE" 'C-m'
+    tmux split-window -h 'exec gotop'
+    tmux split-window -v
+
+    # Window 4
+    tmux select-window -t $sessionName:4
+    tmux send-keys "sudo openfortigui" 'C-m'
+}
+
+buildGenericSession() {
+    folderPath=$1
+
+    # Window 1
+    buildVIFMCmd "$folderPath"
+    tmux select-window -t $sessionName:1
+    tmux send-keys "$vifmCmd" 'C-m'
+
+    # Window 2
+    buildVIFMCmd "$folderPath"
+    tmux select-window -t $sessionName:2
+    tmux send-keys "$vifmCmd" 'C-m'
+
+    # Window 3
+    tmux select-window -t $sessionName:3
+    tmux send-keys "nvim $KNOWLEDGE_BASE" 'C-m'
+    tmux split-window -h 'exec gotop'
+    tmux split-window -v
+}
+
+flag=$1
+
+sessionName=""
+
+# Build session
+case "$flag" in
+    "-a")
+        sessionName="appointy"
+        createSession $sessionName
+        createWindows 4
+        buildAppointySession
+        ;;
+    "-g")
+        sessionName="go"
+        createSession $sessionName
+        createWindows 3
+        buildGenericSession "$GOLANG_PROJECTS"
+        ;;
+    "-r")
+        sessionName="rust"
+        createSession $sessionName
+        createWindows 3
+        buildGenericSession "$RUST_PROJECTS"
+        ;;
+    "-p")
+        sessionName="personal"
+        createSession $sessionName
+        createWindows 3
+        buildGenericSession "$PROJECTS"
+        ;;
+    "new")
+        sessionName=$2
+        if [[ $2 != "" ]]
+        then
+            createSession $sessionName
+            createWindows 1
+        else
+            eval "tmux new"
+        fi
+        ;;
+    *)
+        echo "Invalid usage"
+        exit 1
+        ;;
+esac
+
+# Attach to the session
+tmux attach-session -t $sessionName

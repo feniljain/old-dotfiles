@@ -53,7 +53,7 @@ floating_modifier $mod
 bindsym $mod+Return exec i3-sensible-terminal
 
 # launch thunar file manager
-bindsym $mod+Shift+n exec thunar
+bindsym $mod+Shift+n exec nautilus
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -194,12 +194,14 @@ bindsym $mod+Shift+0 move container to workspace $ws10
 #bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
-bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-bindsym $mod+Shift+p exec poweroff
+# bindsym $mod+Shift+p exec poweroff
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym $mod+Shift+p exec "i3-nagbar -t warning -m 'Do you want to power off the system?' -B 'Yes, power off' 'poweroff'"
+bindsym $mod+Shift+b exec "i3-nagbar -t warning -m 'Do you want to reboot the system?' -B 'Yes, reboot' 'reboot'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -226,7 +228,7 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bindsym $mod+r mode "resize"
+# bindsym $mod+r mode "resize"
 
 set $bg-color 	         #2f343f
 set $inactive-bg-color   #2f343f
@@ -291,6 +293,56 @@ bindsym $mod+$i3-wm.binding.ws_next workspace next
 set_from_resource $i3-wm.binding.ws_prev i3-wm.binding.ws_prev Shift+Tab
 bindsym $mod+$i3-wm.binding.ws_prev workspace prev
 
+###############################################################################
+# Window Resize and Gaps
+###############################################################################
+
+set_from_resource $i3-wm.binding.inc_gaps i3-wm.binding.inc_gaps plus
+set_from_resource $i3-wm.binding.dec_gaps i3-wm.binding.dec_gaps minus
+
+set_from_resource $i3-wm.binding.inc_gaps_big i3-wm.binding.inc_gaps_big Shift+plus
+set_from_resource $i3-wm.binding.dec_gaps_big i3-wm.binding.dec_gaps_big Shift+minus
+
+## Resize // Enter Resize Mode // <> r ##
+mode "Resize Mode" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        ## Resize // Resize Window // ↑ ↓ ← → ##
+        bindsym Left resize shrink width 6 px or 6 ppt
+        bindsym Down resize grow height 6 px or 6 ppt
+        bindsym Up resize shrink height 6 px or 6 ppt
+        bindsym Right resize grow width 6 px or 6 ppt
+
+        bindsym Shift+Left resize shrink width 12 px or 12 ppt
+        bindsym Shift+Down resize grow height 12 px or 12 ppt
+        bindsym Shift+Up resize shrink height 12 px or 12 ppt
+        bindsym Shift+Right resize grow width 12 px or 12 ppt
+
+        ## Resize // Resize Window // k j h l ##
+        bindsym $i3-wm.binding.left resize shrink width 6 px or 6 ppt
+        bindsym $i3-wm.binding.up resize grow height 6 px or 6 ppt
+        bindsym $i3-wm.binding.down resize shrink height 6 px or 6 ppt
+        bindsym $i3-wm.binding.right resize grow width 6 px or 6 ppt
+
+        bindsym $i3-wm.binding.move_left resize shrink width 12 px or 12 ppt
+        bindsym $i3-wm.binding.move_up resize grow height 12 px or 12 ppt
+        bindsym $i3-wm.binding.move_down resize shrink height 12 px or 12 ppt
+        bindsym $i3-wm.binding.move_right resize grow width 12 px or 12 ppt
+
+        ## Resize // Window Gaps // + - ##
+        bindsym $i3-wm.binding.dec_gaps gaps inner current minus 6
+        bindsym $i3-wm.binding.inc_gaps gaps inner current plus 6
+        bindsym $i3-wm.binding.dec_gaps_big gaps inner current minus 12
+        bindsym $i3-wm.binding.inc_gaps_big gaps inner current plus 12
+
+        ## Resize // Exit Resize Mode // Escape or Enter ##
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "Resize Mode"
+# #########################################
+
 # Sreen brightness controls
 bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
@@ -319,6 +371,7 @@ bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/display.sh
 # - compton
 # - rofi
 # - playerctl
+# - i3-volume in home dir(https://github.com/hastinbe/i3-volume.git)
 # Review the lines below and append to ~/.config/i3/config
 
 ## Volume control
@@ -349,3 +402,11 @@ set $volumestep 5
 bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig up $volumestep
 bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig down $volumestep
 bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig mute
+
+#i3-gaps config
+gaps inner 6
+gaps outer 2
+
+smart_gaps on
+
+for_window [class="^.*"] border pixel 2

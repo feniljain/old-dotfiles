@@ -80,7 +80,7 @@ ZSH_THEME="robbyrussell"
 plugins=(
 	git
 	zsh-autosuggestions
-    zsh-z
+    # zsh-z
 	# zsh-syntax-highlighting
 	# zsh-vim-mode
 )
@@ -129,7 +129,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:$(go env GOPATH)/bin"
 export PATH="$HOME/.cargo/bin:$PATH"
 # export PATH="$PATH:/home/fenil/evans_linux_386"
-export PATH="$PATH:/home/fenil/nvim-linux64/bin"
+# export PATH="$PATH:/home/fenil/nvim-linux64/bin"
 export PATH="$PATH:/opt/firefox/firefox"
 export PATH="$PATH:/usr/local/share/npm/bin"
 # export PATH="$PATH:/home/fenil/flutter_linux_v1.9.1+hotfix.6-stable/flutter/bin/cache/dart-sdk/bin"
@@ -169,4 +169,6 @@ LC_TIME="en_US.UTF-8"
 LC_ALL="en_US.UTF-8"
 
 alias luamake=/home/feniljain/Projects/softwares/lua-language-server/3rd/luamake/luamake
-alias goland=/media/data/Misc/E/softwares/GoLand-2021.1.1/bin/goland.sh
+alias goland=/opt/GoLand-2021.1.3/bin/goland.sh
+# alias trishul='docker run -it --mount type=bind,src="$(pwd)",target=/app/protos registry.appointy.com/trishul'
+alias trishul='docker run -it --mount type=bind,src="$(pwd)",target=/app/protos ayushbpl10/trishul:v1'
