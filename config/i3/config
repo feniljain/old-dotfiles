@@ -356,7 +356,7 @@ bindsym XF86AudioPause exec playerctl pause-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-exec /usr/bin/desktime-linux
+# exec /usr/bin/desktime-linux
 exec /usr/bin/safeeyes
 exec_always feh --bg-scale ~/Pictures/Wallpapers/xuid3yol2x271.webp
 exec_always --no-startup-id compton
@@ -372,7 +372,14 @@ bindsym $mod+p exec --no-startup-id ~/.config/i3/scripts/display.sh
 # - rofi
 # - playerctl
 # - i3-volume in home dir(https://github.com/hastinbe/i3-volume.git)
-# Review the lines below and append to ~/.config/i3/config
+
+#i3-gaps config
+gaps inner 6
+gaps outer 2
+
+smart_gaps on
+
+for_window [class="^.*"] border pixel 2
 
 ## Volume control
 
@@ -381,7 +388,7 @@ set $volumepath ~/i3-volume
 
 # Command for the status line
 #   ie: i3blocks, i3status
-set $statuscmd i3status
+set $statuscmd i3blocks
 
 # Signal used to update the status line
 #   i3blocks uses SIGRTMIN+10 by default
@@ -402,11 +409,3 @@ set $volumestep 5
 bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig up $volumestep
 bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig down $volumestep
 bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig mute
-
-#i3-gaps config
-gaps inner 6
-gaps outer 2
-
-smart_gaps on
-
-for_window [class="^.*"] border pixel 2
